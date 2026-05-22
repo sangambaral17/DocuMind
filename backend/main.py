@@ -52,6 +52,16 @@ class QueryRequest(BaseModel):
     query: str
     top_k: int = 3
 
+@app.get("/")
+def root():
+    return {
+        "message": "DocuMind API is running!",
+        "docs": "Visit /docs for the interactive Swagger interface",
+        "health": "Visit /health to check system status"
+    }
+
+
+
 @app.post("/upload")
 async def upload_document(file: UploadFile = File(...)):
     global embedder, vector_store
